@@ -66,3 +66,30 @@ const graphQLServer = express();
 graphQLServer.use('/', graphqlHTTP({ schema: schema, graphiql: true }));
 graphQLServer.listen(8080);
 console.log('The GraphQL Server is running.');
+
+const compiler = webpack({
+  entry: './index.js',
+  output: {
+    path: __dirname,
+    filename: 'bundle.js',
+    publicPath: '/static/',
+  },
+  module: {
+    loaders: [
+      { test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
+});
+
+const app = new WebpackDevServer(compiler, {
+  contentBase: '/public/',
+  proxy: { '/graphql': `http://localhost:${8080}` },
+  publicPath: '/static/',
+  stats: { colors: true },
+});
+app.use('/', express.static('static'));
+app.listen(3000);
+console.log('The App Server is running.');
