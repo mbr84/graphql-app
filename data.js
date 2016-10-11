@@ -1,4 +1,4 @@
-export const goldbergs = {
+const goldbergs = {
   1: {
     character: 'Beverly Goldberg',
     actor: 'Wendi McLendon-Covey',
@@ -42,3 +42,5 @@ export const goldbergs = {
     id: 6,
   },
 };
+
+module.exports = goldbergs;
