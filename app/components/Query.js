@@ -5,15 +5,15 @@ import { getGraph } from '../actions/actions.js';
 class Query extends React.Component {
   componentDidMount() {
     this.props.dispatch(
-      getGraph('{goldberg(id: 2) {id, character, actor}}')
+      getGraph('{goldberg(id: 2) {id, character, actor, role, traits}}')
     );
   }
 
   render() {
-    const dispatch = this.props.dispatch;
-    const fetchInProgress = String(this.props.store.get('fetching'));
+    let dispatch = this.props.dispatch;
+    let fetchInProgress = String(this.props.store.get('fetching'));
     let queryText;
-    const goldberg = this.props.store.get('data').toObject();
+    let goldberg = this.props.store.get('data').toObject();
     return (
       <div>
         <p>Fetch in progress: {fetchInProgress}</p>
@@ -30,10 +30,10 @@ class Query extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+let mapStateToProps = (state) => ({
   store: state,
 });
 
-export const QueryContainer = connect(
+export let QueryContainer = connect(
  mapStateToProps
 )(Query);
