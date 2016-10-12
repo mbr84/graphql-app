@@ -5,7 +5,7 @@ import { getGraph } from '../actions/actions.js';
 class Query extends React.Component {
   componentDidMount() {
     this.props.dispatch(
-      getGraph('{goldberg(id: 2) {id, character, actor}')
+      getGraph('{goldberg(id: 2) {id, character, actor}}')
     );
   }
 
