@@ -7,15 +7,15 @@ const startingRequest = () => (
 const finishedRequest = (response) => (
   {
     type: 'FINISHED_REQUEST',
-    response: response,
+    response,
   }
 );
 
 export const getGraph = (payload) => {
   return dispatch => {
     dispatch(startingRequest());
-    return new Promise(function(resolve) {
-      let request = new XMLHttpRequest();
+    return new Promise(function (resolve) {
+      const request = new XMLHttpRequest();
       request.open('POST', '/graphql', true);
       request.setRequestHeader('Content-Type',
                                'application/graphql');
@@ -26,6 +26,6 @@ export const getGraph = (payload) => {
         }
       };
     }).then(response =>
-            dispatch(finishedRequest(JSON.parse(response))));
+      dispatch(finishedRequest(JSON.parse(response))));
   };
 };
